@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "480174270261",
+    "project_id": "myquizlet-9a94f",
+    "storage_bucket": "myquizlet-9a94f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480174270261:android:fdbe99223c2b06d0aa4e7c",
+        "android_client_info": {
+          "package_name": "com.JasonLiaoZeng.my_quizlet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480174270261-a1m9rmonof97ks481fd9dd8ppcfm0fg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJB8VlVEbPahR6HDn071EvEMMdejRwbVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480174270261-a1m9rmonof97ks481fd9dd8ppcfm0fg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

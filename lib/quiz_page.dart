@@ -66,12 +66,12 @@ class _QuizPageState extends State<QuizPage> {
                     ans: widget.questionSet[quesIndex].ans,
                     index: i,
                   ));
-                  quesIndex += 1;
-                  if (quesIndex >= widget.questionSet.length) {
+                  if (quesIndex >= widget.questionSet.length - 1) {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>
                             QuizResult(scoreKeeper: scoreKeeper)));
                   } else {
+                    quesIndex += 1;
                     refreshChoicesPannel();
                   }
                 });

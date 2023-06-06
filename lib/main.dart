@@ -2,12 +2,28 @@ import 'package:flutter/material.dart';
 import 'quiz_page.dart';
 
 void main() {
-  runApp(MaterialApp(home: Quizzler()));
+  runApp(Quizzler());
+}
+
+class Quizzler extends StatelessWidget {
+  const Quizzler({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: HomePage.id,
+      routes: {
+        HomePage.id: (context) => HomePage(),
+      },
+    );
+  }
 }
 
 void doNothing() {}
 
-class Quizzler extends StatelessWidget {
+class HomePage extends StatelessWidget {
+  static String id = "home";
+
   List<question> demoQuizQuestions = [
     const question(
       ques: "1+1=?",
