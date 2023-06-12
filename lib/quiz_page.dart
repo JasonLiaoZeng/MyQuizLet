@@ -1,4 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+class question {
+  final String ques;
+  final int ans;
+  final List<String> choices;
+
+  const question({
+    required this.ques,
+    required this.ans,
+    required this.choices,
+  });
+
+  factory question.fromJson(Map<String, dynamic> json) {
+    return question(
+        ques: json['ques'], ans: json['ans'], choices: json['choices']);
+  }
+}
+
+class quiz {
+  final String quizName;
+  final List<question> questionSet;
+
+  const quiz({required this.quizName, required this.questionSet});
+
+  factory quiz.fromJson(Map<String, dynamic> json) {
+    List<question> questionSet = json['questionSet'];
+    return quiz(quizName: json['quizName'], questionSet: questionSet);
+  }
+}
+
+class Quiz {
+  final String name;
+  final List<question> questions;
+
+  const Quiz({required this.name, required this.questions});
+}
 
 class QuizScreen extends StatelessWidget {
   final List<question> questionSet;
@@ -177,18 +214,6 @@ class score_wrong_icon extends StatelessWidget {
 }
 
 void doNothing() {}
-
-class question {
-  final String ques;
-  final int ans;
-  final List<String> choices;
-
-  const question({
-    required this.ques,
-    required this.ans,
-    required this.choices,
-  });
-}
 
 class QuizResult extends StatelessWidget {
   final List<Widget> scoreKeeper;

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'quiz_page.dart';
+import 'choose_quiz_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(Quizzler());
 }
 
@@ -14,6 +19,7 @@ class Quizzler extends StatelessWidget {
       initialRoute: HomePage.id,
       routes: {
         HomePage.id: (context) => HomePage(),
+        ChooseQuizPage.id: (context) => ChooseQuizPage()
       },
     );
   }
@@ -72,11 +78,17 @@ class HomePage extends StatelessWidget {
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.green,
                         ),
-                        onPressed: () => (Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  QuizScreen(questionSet: demoQuizQuestions)),
-                        )),
+                        // onPressed: () => (Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //       builder: (context) =>
+                        //           QuizScreen(questionSet: demoQuizQuestions)),
+                        // )),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChooseQuizPage()));
+                        },
                         child: const Text(
                           'Choose Quiz',
                           style: TextStyle(

@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "480174270261",
     "project_id": "myquizlet-9a94f",
+    "firebase_url": "https://myquizlet-9a94f-default-rtdb.firebaseio.com",
     "storage_bucket": "myquizlet-9a94f.appspot.com"
   },
   "client": [
