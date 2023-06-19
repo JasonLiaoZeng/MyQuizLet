@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'quiz_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 
+void doNodthing() {}
+
 class ModifyQuizPage extends StatelessWidget {
   static String id = 'modify_quiz';
   final _db = FirebaseDatabase.instance.ref();
@@ -37,60 +39,80 @@ class ModifyQuizPage extends StatelessWidget {
             children.add(
               SizedBox(
                 width: 400,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.black87,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => QuizPage(
-                          questionSet: value,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 6,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.black87,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QuizPage(
+                                questionSet: value,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              key,
+                            ),
+                            Icon(Icons.edit),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        key,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: IconButton(
+                        color: Colors.greenAccent,
+                        icon: Icon(Icons.cloud_upload_outlined),
+                        onPressed: doNothing,
                       ),
-                      Icon(Icons.edit),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             );
           });
           children.add(
             SizedBox(
-              width: 400,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.black87,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuizPage(
-                        questionSet: [],
+                width: 400,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.black87,
+                          foregroundColor: Colors.orangeAccent,
+                        ),
+                        onPressed: doNothing,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.add_circle_outline),
+                          ],
+                        ),
                       ),
                     ),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.add_circle_outline),
+                    Expanded(
+                      flex: 1,
+                      child: IconButton(
+                        color: Colors.redAccent,
+                        icon: Icon(Icons.cloud_download_outlined),
+                        onPressed: doNothing,
+                      ),
+                    )
                   ],
-                ),
-              ),
-            ),
+                )),
           );
         } else if (snapshot.hasError) {
           children = <Widget>[
