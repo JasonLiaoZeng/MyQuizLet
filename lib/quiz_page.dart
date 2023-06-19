@@ -12,9 +12,13 @@ class question {
     required this.choices,
   });
 
-  factory question.fromJson(Map<String, dynamic> json) {
+  factory question.fromJson(dynamic json) {
+    var choices = List<String>.from(json['choices']);
     return question(
-        ques: json['ques'], ans: json['ans'], choices: json['choices']);
+      ques: json['ques'] as String,
+      ans: json['ans'] as int,
+      choices: choices,
+    );
   }
 }
 
@@ -24,7 +28,7 @@ class quiz {
 
   const quiz({required this.quizName, required this.questionSet});
 
-  factory quiz.fromJson(Map<String, dynamic> json) {
+  factory quiz.fromJson(dynamic json) {
     List<question> questionSet = json['questionSet'];
     return quiz(quizName: json['quizName'], questionSet: questionSet);
   }

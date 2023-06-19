@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'quiz_page.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -11,18 +13,13 @@ class ChooseQuizPage extends StatelessWidget {
     final snapshot = await _db.ref.child("Quizzes").get();
     Map<dynamic, dynamic> data = snapshot.value as Map<dynamic, dynamic>;
     Map<String, List<question>> convertedData = {};
-    //
-    // data.forEach((key, value) {
-    //   // final List<question> questions =
-    //   //     value.convertedData[key.toString()] = value;
-    //   List<question> questionList = [];
-    //   value.map((obj) => obj as question).toList();
-    //   convertedData[key.toString()] = value as List<question>;
-    // });
 
-    // Map<dynamic, dynamic> data = snapshot.value as Map<dynamic, dynamic>;
-    // Map<String, List<question>> convertedData = {};
-    // data.forEach((key, value) {});
+    data.forEach((key, value) {
+      var objList = value as List<dynamic>;
+      List<question> questionSet =
+          objList.map((e) => question.fromJson(e)).toList();
+      convertedData[key.toString()] = questionSet;
+    });
 
     print(snapshot.value);
 
@@ -42,18 +39,27 @@ class ChooseQuizPage extends StatelessWidget {
           children = [];
           snapshot.data!.forEach((key, value) {
             children.add(
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QuizPage(
-                        questionSet: value,
+              SizedBox(
+                width: 400,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.black87,
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QuizPage(
+                          questionSet: value,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                child: Text(key),
+                    );
+                  },
+                  child: Text(
+                    key,
+                  ),
+                ),
               ),
             );
           });
@@ -84,12 +90,49 @@ class ChooseQuizPage extends StatelessWidget {
         }
         return Scaffold(
           backgroundColor: Colors.grey.shade900,
-          body: ListView(
-            children: [
-              Column(
-                children: children,
-              )
-            ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Text(
+                  "MyQuizLet",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0,
+                  ),
+                ),
+                Expanded(
+                  flex: 6,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      Column(
+                        children: children,
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.deepOrangeAccent,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Return to Home Screen',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
