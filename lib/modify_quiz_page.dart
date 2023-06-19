@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'quiz_page.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class ChooseQuizPage extends StatelessWidget {
-  static String id = 'choose_quiz';
+class ModifyQuizPage extends StatelessWidget {
+  static String id = 'modify_quiz';
   final _db = FirebaseDatabase.instance.ref();
 
   Future<Map<String, List<question>>> getQuizzes() async {
@@ -22,7 +22,7 @@ class ChooseQuizPage extends StatelessWidget {
     return convertedData;
   }
 
-  ChooseQuizPage({super.key});
+  ModifyQuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +52,46 @@ class ChooseQuizPage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
-                    key,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        key,
+                      ),
+                      Icon(Icons.edit),
+                    ],
                   ),
                 ),
               ),
             );
           });
+          children.add(
+            SizedBox(
+              width: 400,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.black87,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuizPage(
+                        questionSet: [],
+                      ),
+                    ),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add_circle_outline),
+                  ],
+                ),
+              ),
+            ),
+          );
         } else if (snapshot.hasError) {
           children = <Widget>[
             const Icon(

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'quiz_page.dart';
 import 'choose_quiz_page.dart';
+import 'modify_quiz_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,11 +79,6 @@ class HomePage extends StatelessWidget {
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.green,
                         ),
-                        // onPressed: () => (Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //       builder: (context) =>
-                        //           QuizScreen(questionSet: demoQuizQuestions)),
-                        // )),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -99,11 +95,16 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Padding(
                       padding: EdgeInsets.all(15.0),
                       child: TextButton(
-                        onPressed: doNothing,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ModifyQuizPage()));
+                        },
                         child: Text(
                           'Modify Quizzes',
                           style: TextStyle(
